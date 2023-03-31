@@ -1,0 +1,332 @@
+git init 
+
+git add archivo.txt
+
+git commit -m "mensaje del commit"
+
+git add .  ---> (agrega todos los archivos que puedas agregar en esa ruta)
+
+git push ---> para subir a repo remoto (github)
+
+git status ---> (para ver que archivos fueron cambiados desde el ultimo commit)
+
+git show ---> (te muestra los cambios de un archivo)
+
+git log ---> archivos.txt (te muestra la historia de los commit de un archivo)
+
+git log -git-stat ---> te muestra mas especificamente los cambios que se hicieron en los commits aparte de mostrarte el historial  (SE SALE CON Q)
+
+git log --all --graph --decorate --oneline ---> te muestra la historia de los commit de un proyecto, graficado. 
+
+git rm head archivo.txt ---> (retira los archivos preparados para hacer commit, antes de hacerlo)
+
+un archivo word (.docx) es un archivo binario
+
+un txt si es texto plano
+
+git guarda texto plano y tambien binario pero no es tan preciso
+
+
+
+comandos:
+
+pwd --> te da la ruta donde estas actualmente
+
+ls -al ---> muestra los archivos de la carpeta actual (ls), los ocultos y en forma de lista (el argumento -al) (l para enlistar, a para ocultos)
+
+clear ---> limpiar consola/ control + L tambien funciona
+
+en bash con windows no importan las mayusculas ni los espacios, en linux y mac SI IMPORTAN
+
+mkdir nombreDeLaCarpeta ---> crea una carpeta
+
+touch nombreDelArchivo.txt ---> crea un archivo vacio
+
+. ---> es la carpeta actual
+
+.. ---> es la carpeta anterior
+
+cat archivo.txt ---> muestra rapidamente un archivo en consola
+
+history ---> historia de los comandos hechos en la consola
+si quiero repetir uno de esos comandos, con el numero que tiene al lado hago:
+
+!numero ---> y se vuelve a ejecutar ese comando 
+
+rm archivo.txt ---> elimina el archivo 
+
+cualquierComando --help ---> te muestra unas explicaciones de como funcionan los comandos 
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+para configurar el usuario y email
+
+git config -l
+
+git config --global user.name "nombre alguno"
+
+git config --global user.email "nombre@alguno"
+
+git config --list ---> para chequear esos datos
+
+
+esc + shift + z + z para salir de la pantalla cuando te olvidas de poner un mensaje al commit (VIM) Es un lector de codigo
+
+
+git diff <numeroCommit> <otroComit> ---> para ver los cambios entre dos commits de un archivo //mejor poner la "vieja" primero, despues la + reciente.
+
+git diff  ---> tambien se puede usar cuando tenemos archivos en staging (agregados pero no commiteados) y archivos en el repo local con cambios, al ejecutar muestra dichos cambios
+
+git reset <commit> --soft ---> volvemos a nuestro archijvo a la verson del commit indicada, pero sin borar los commits usados anteriormente 
+
+git reset <commit> --hard ---> volvemos a nuestro archijvo a la verson del commit indicada, Borrando Todos los commits hechos anteriormente a la version del commit indicada
+
+git checkout #commit archivo.txt ---> volvemos nuestro archivo a la version del commit indicada, sin cambiar nada en el staging. 
+
+git checkout master archivo.txt ---> volvemos nuestro archivo a la version que teniamos antes de hacer el primer checkout sin cambiar nada el staging.
+
+git commit -am "mensaje" ---> Solo sirve si todos los archivos fueron trackeados y no hay archivos nuevos, con este comando nos evitamos el paso de git add . 
+
+
+///////////////BRANCHES//////////////////////////
+
+un branch es una rama, las ramas se utilizan generalmente para poder hacer distintas modificaciones, probar cosas o simplemente abordar una app muy grande 
+trabajandola desde distintas ramas para luego hacer un merge a la rama master/main.
+No es mas que "una copia" del ultimo commit (o desde donde se haga) en la que se puede seguir commiteando pero la rama principal "no se  entera" de esos cambios
+ 
+
+git branch nombre  ---> Crea una nueva rama con ese nombre 
+
+git checkout nombre ---> para moverme entre branches
+
+git branch ---> para ver los branchs existentes
+
+git branch  -D nombre ---> para eliminar ese branch
+
+git show-branch --all ---> muestra los branchs con un poco mas de info 
+
+gitk ---> para ver el proyecto en commits visuales
+
+git push origin branch ---> para pushear los branch a github 
+
+/////////////// MERGES //////////////////////////
+
+Un merge es fusionar  2 commits, el merge se realiza (mayormente) desde la rama main. Desde la rama main hacemos un merge a otra rama haciendo 
+
+git merge nombreDeRama 
+
+esto tambien lleva un mensaje ya que tecnicamente es un nuevo commit pero fusionando otros 2 
+cuando hacemos el merge, tambien se agregan al historial de commit de la rama master los commit realizados en el branch o rama.
+
+/////////////// REMOTE //////////////////////////
+
+
+git init 
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin <link del repo en GH>
+git pull 
+git pull origin main --allow-unrelated-histories
+git push origin main 
+
+
+
+git remote -v ---> para ver que espacion remotos estan conectados con mi proyecto
+
+git remote set-url origin link ---> para cambiarlo
+
+/////////////// TAGS //////////////////////////
+
+git tag -a nombreTag -m "mensaje" para crea un tag el nombre suele ser la version v0.1
+
+git tag para ver los tags
+
+git push origin --tags para pushearlos a github
+
+git tag -d nombreTag para eliminarlo
+
+git push origin :refs/tags/nombreTag para eliminarlo de github
+
+
+
+
+
+
+...............................................................................
+los archivos binarios no deben subirse al repositorio, deben ignorarse.
+
+
+
+Pull request:
+Es una funcionalidad de github (en gitlab llamada merge request y en bitbucket push request), en la que un colaborador pide que revisen sus cambios antes de hacer merge a una rama, normalmente master.
+
+Al hacer un pull request se genera una conversación que pueden seguir los demás usuarios del repositorio, así como autorizar y rechazar los cambios.
+
+El flujo del pull request es el siguiente
+
+Se trabaja en una rama paralela los cambios que se desean (git checkout -b <rama>)
+Se hace un commit a la rama (git commit -am '<Comentario>')
+Se suben al remoto los cambios (git push origin <rama>)
+En GitHub se hace el pull request comparando la rama master con la rama del fix.
+Uno, o varios colaboradores revisan que el código sea correcto y dan feedback (en el chat del pull request)
+El colaborador hace los cambios que desea en la rama y lo vuelve a subir al remoto (automáticamente jala la historia de los cambios que se hagan en la rama, en remoto)
+Se aceptan los cambios en GitHub
+Se hace merge a master desde GitHub
+Importante: Cuando se modifica una rama, también se modifica el pull request.
+
+Responder
+Forks o Bifurcaciones
+Es una característica única de GitHub en la que se crea una copia exacta del estado actual de un repositorio directamente en GitHub, éste repositorio podrá servir como otro origen y se podrá clonar (como cualquier otro repositorio), en pocas palabras, lo podremos utilizar como un git cualquiera
+.
+Un fork es como una bifurcación del repositorio completo, tiene una historia en común, pero de repente se bifurca y pueden variar los cambios, ya que ambos proyectos podrán ser modificados en paralelo y para estar al día un colaborador tendrá que estar actualizando su fork con la información del original.
+.
+Al hacer un fork de un poryecto en GitHub, te conviertes en dueñ@ del repositorio fork, puedes trabajar en éste con todos los permisos, pero es un repositorio completamente diferente que el original, teniendo alguna historia en común.
+.
+Los forks son importantes porque es la manera en la que funciona el open source, ya que, una persona puede no ser colaborador de un proyecto, pero puede contribuír al mismo, haciendo mejor software que pueda ser utilizado por cualquiera.
+.
+Al hacer un fork, GitHub sabe que se hizo el fork del proyecto, por lo que se le permite al colaborador hacer pull request desde su repositorio propio.
+
+
+MARKDOWN https://www.youtube.com/watch?v=y6XdzBNC0_0
+
+  REBASE
+
+git rebase master   ---> Rebase es el proceso de mover o combinar una secuencia de confirmaciones en una nueva confirmación base. 
+La reorganización es muy útil y se visualiza fácilmente en el contexto de un flujo de trabajo de ramas de funciones. 
+
+Para hacer un rebase en la rama feature de la rama master, correrías los siguientes comandos:
+
+git checkout feature
+git rebase master
+
+Esto trasplanta la rama feature desde su locación actual hacia la punta de la rama master
+Ahora, falta fusionar la rama feature con la rama master
+
+
+git checkout master
+git rebase feature
+
+Nunca debes reorganizar las confirmaciones una vez que se hayan enviado a un repositorio público.
+ La reorganización sustituiría las confirmaciones antiguas por las nuevas y parecería que esa parte del historial de tu proyecto se hubiera desvanecido de repente.
+
+El comando rebase es una mala práctica, sobre todo en repositorios remotos. Se debe evitar su uso, pero para efectos de práctica te lo vamos a mostrar,
+ para que hagas tus propios experimentos. Con rebase puedes recoger todos los cambios confirmados en una rama y ponerlos sobre otra.
+
+  Cambiamos a la rama que queremos traer los cambios
+git checkout experiment
+  Aplicamos rebase para traer los cambios de la rama que queremos 
+git rebase master
+
+
+ 		 STASH
+El stashed nos sirve para guardar cambios para después, Es una lista de estados que nos guarda algunos cambios que hicimos en Staging para poder cambiar
+de rama sin perder el trabajo que todavía no guardamos en un commit
+
+El comando git stash guarda el trabajo actual del Staging en una lista diseñada para ser temporal llamada Stash, para que pueda ser recuperado en el futuro.
+
+Para agregar los cambios al stash se utiliza el comando:
+
+git stash
+
+Podemos poner un mensaje en el stash, para asi diferenciarlos en git stash list por si tenemos varios elementos en el stash. Ésto con:
+
+	git stash save "mensaje identificador del elemento del stashed"
+
+Para recuperar los últimos cambios desde el stash a tu staging area utiliza el comando:
+
+	git stash pop
+
+Para aplicar los cambios de un stash específico y eliminarlo del stash:
+
+	git stash pop stash@{<num_stash>}
+
+Para retomar los cambios de una posición específica del Stash puedes utilizar el comando(Donde el <num_stash> lo obtienes desden el git stash list):
+
+	git stash apply stash@{<num_stash>}  
+
+Para ver la lista de cambios guardados en Stash y así poder recuperarlos o hacer algo con ellos podemos utilizar el comando:
+
+	git stash list
+
+Para crear una rama y aplicar el stash más reciente podemos utilizar el comando
+
+	git stash branch <nombre_de_la_rama>
+
+Si deseas crear una rama y aplicar un stash específico (obtenido desde git stash list) puedes utilizar el comando:
+
+	git stash branch nombre_de_rama stash@{<num_stash>}
+
+Para eliminar los cambios más recientes dentro del stash (el elemento 0), podemos utilizar el comando:
+
+	git stash drop
+
+Pero si, en cambio, conoces el índice del stash que quieres borrar (mediante git stash list) puedes utilizar el comando:
+
+	git stash drop stash@{<num_stash>}
+
+Si, en cambio, deseas eliminar todos los elementos del stash, puedes utilizar:
+
+	git stash clear
+
+
+Consideraciones:
+El cambio más reciente (al crear un stash) SIEMPRE recibe el valor 0 y los que estaban antes aumentan su valor.
+Al crear un stash tomará los archivos que han sido modificados y eliminados.
+ Para que tome un archivo creado es necesario agregarlo al Staging Area con git add [nombre_archivo] con la intención de que git tenga un seguimiento de ese archivo, o también utilizando el comando git stash -u (que guardará en el stash los archivos que no estén en el staging).
+Al aplicar un stash este no se elimina, es buena práctica eliminarlo.
+
+
+		CLEAN 
+El comando clean actúa en archivos sin seguimiento, este tipo de archivos son aquellos que se encuentran en el directorio de trabajo,
+ pero que aún no se han añadido al índice de seguimiento de repositorio con el comando add.
+
+git clean
+
+La ejecución del comando predeterminado puede producir un error. La configuración global de Git obliga a usar la opción force con el comando para que sea efectivo.
+Se trata de un importante mecanismo de seguridad ya que este comando no se puede deshacer.
+
+
+Revisa que archivos no tienen seguimiento.
+
+	git clean --dry-run
+
+Elimina los archivos listados de no seguimiento.
+
+	git clean -f
+
+
+
+
+Git guarda todos los cambios aunque decidas borrarlos, al borrar un cambio lo que estás haciendo sólo es actualizar la punta del branch, 
+para gestionar éstas puntas existe un mecanismo llamado registros de referencia o reflogs…La gestión de estos cambios es mediante los hash’es de referencia (o ref) que son apuntadores a los commits…
+Los recoges registran cuándo se actualizaron las referencias de Git en el repositorio local (sólo en el local), por lo que si deseas ver cómo has modificado la historia puedes utilizar el comando:
+
+	git reflog 
+
+
+git checkout Puedes moverte sin realizar ningún cambio al commit exacto de la ref
+
+	git checkout eff544f
+
+
+git reset: Hará que el último commit sea el pasado por la ref, usar este comando sólo si sabes exactamente qué estás haciendo
+
+	git reset --hard eff544f # Perderá todo lo que se encuentra en staging y en el Working directory y se moverá el head al commit eff544f
+
+	git reset --soft eff544f # Te recuperará todos los cambios que tengas diferentes al commit eff544f, los agregará al staging area y moverá el head al commit eff544f
+
+
+
+Este comando sirve para agregar archivos nuevos o actualizar el commit anterior y no generar commits innecesarios. También es una forma sencilla de editar 
+o agregar comentarios al commit anterior porque abrirá la consola para editar este commit anterior.
+
+		git commit --amend  
+
+Usar amend es una mala práctica, sobre todo cuando ya se ha hecho push o pull al repositorio remoto. Al momento de hacer amend con algún commit que esté en remoto,
+ va a generar un conflicto que se va a arreglar haciendo un commit adicional y se perderá el beneficio del amend.
+
+
+

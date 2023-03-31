@@ -1,0 +1,32 @@
+1)Qué es el Scope y cómo funciona el Global Scope?
+
+El scope es el alcance que va a tener tu variable dentro de tu codigo
+
+solo var puede ser re asignada
+
+let algo = "algo"
+
+let algo = "otra cosa"  ==> ERROR (si se puede con var)
+
+
+
+
+Lexical Scope / Ámbito Léxico: El intérprete de JavaScript funciona desde el ámbito de ejecución actual y funciona hasta encontrar la variable en cuestión.
+ Si la variable no se encuentra en ningún ámbito, se genera una excepción.
+
+Este tipo de búsqueda se llama ámbito léxico. El alcance de una variable se define por su ubicación dentro del código fuente
+, y las funciones anidadas tienen acceso a las variables declaradas en su alcance externo. No importa de dónde se llame una función,
+ o incluso cómo se llama, su alcance léxico depende solo de dónde se declaró la función.
+
+let y const tiene scope de bloque
+y var tiene scope de function
+
+
+¿Qué es un closure?
+
+
+es la combinacion de una funcion y el ambito lexico en la cual ha sido declara dicha funcion
+
+un closure recuerda el ambito en el cual ha sido creado
+
+ 

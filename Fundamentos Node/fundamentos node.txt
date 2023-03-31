@@ -1,0 +1,223 @@
+PROCESO DE NODE
+
+    1.- Va a abrirse un proceso, ese proceso es un proceso de node
+    2.- Interpreta todo el archivo
+    3.- Convertirlo a código maquina
+    4.- Prepara todo lo que necesita para ejecutarse
+    5.- Se ejecuta
+    6.- Se cierra el proceso, y termina
+
+DESVENTAJAS MONOHILO
+
+    - Si no se manejan bien los errores y uno truena, ya no continua con los procesos posteriores
+    - Debes estar pendiente de todo el código
+
+
+
+Producción
+
+sudo npm install -g pm2
+
+PM2 Es un demonio administrador de procesos que me puede ayudar a administrar y mantener mi aplicación 24/7.
+
+Voy a poner monitorizar el código para saber si algo se rompe.
+Me permite ver dashboards de mi código, puedo ver que está corriendo.
+Puedo ver el rendimiento de mi cpu
+Con: pm2 stop + id —> me detiene el proceso que está en ejecución con ese ID.
+
+CONSOLE
+
+Con console podemos imprimir todo tipo de valores por
+nuestra terminal.
+
+console.log: recibe cualquier tipo y lo muestra en el consola.
+console.info: es equivalente a log pero es usado para informar.
+console.error: es equivalente a log pero es usado para errores.
+console.warn: es equivalente a log pero es usado para warning.
+console.table: muestra una tabla a partir de un objeto.
+console.count: inicia un contador autoincremental.
+console.countReset: reinicia el contador a 0.
+console.time: inicia un cronometro en ms.
+console.timeEnd: Finaliza el cronometro.
+console.group: permite agrupar errores mediante identación.
+console.groupEnd: finaliza la agrupación.
+console.clear: Limpia la consola.
+
+PROCESOS HIJO
+
+El módulo de procesos secundarios de Node.js (child_process) tiene dos funciones spawn y exec,
+ mediante las cuales podemos iniciar un proceso secundario para ejecutar otros programas en el sistema.
+
+La diferencia más significativa entre child_process.spawn y child_process.exec está en lo que spawn devuelve un stream 
+y exec devuelve un buffer.
+
+Usa spawn cuando quieras que el proceso hijo devuelva datos binarios enormes a Node.
+Usa exec cuando quieras que el proceso hijo devuelva mensajes de estado simples.
+Usa spawn cuando quieras recibir datos desde que el proceso arranca.
+Usa exec cuando solo quieras recibir datos al final de la ejecución.
+
+
+const os = require('os')
+
+// Architecture
+console.log('Architecture:')
+console.log(os.arch())
+console.log('')
+
+// Platform
+console.log('Platform:')
+console.log(os.platform())
+console.log('')
+
+// cpus
+console.log('cpus')
+console.log(os.cpus().length)
+console.log('')
+
+// Errores y señales del sistema
+console.log('Erros and signals of the system')
+console.log(os.constants)
+console.log('')
+
+
+
+
+
+// Function to convert from bytes to kbytes, mbytes and gbytes
+const SIZE = 1024
+
+kb = bytes => { return bytes / SIZE }
+mb = bytes => { return kb(bytes) / SIZE }
+gb = bytes => { return mb(bytes) / SIZE }
+
+// Total Ram Memory
+console.log('Total Ram Memory:')
+console.log(`${os.totalmem()} bytes`)
+console.log(`${kb(os.totalmem)} kb`)
+console.log(`${mb(os.totalmem)} mb`)
+console.log(`${gb(os.totalmem)} gb`)
+console.log('')
+
+// Free memory we have in bytes units
+console.log('Free memory we have in kbytes units')
+console.log(`free Ram memory: ${os.freemem()} bytes`)
+console.log(`free Ram memory: ${kb(os.freemem())} kb`)
+console.log(`free Ram memory: ${mb(os.freemem())} mb`)
+console.log(`free Ram memory: ${gb(os.freemem())} mb`)
+console.log('')
+
+
+// Directory for the user root
+console.log('Directory for the user root')
+console.log(os.homedir())
+console.log('')
+
+// Directory for temporal files
+console.log('Directory for temporal files')
+console.log(os.tmpdir())
+console.log('')
+
+// Hostname of a server
+console.log('Hostname of any server')
+console.log(os.hostname())
+console.log('')
+
+// Actived Network interfaces right now
+console.log('Network Interfaces right now')
+console.log(os.networkInterfaces())
+console.log('')
+
+Un buffer es un montón de datos y un stream es un proceso donde pasan un montón de datos.
+
+La información en memoria esta pensada para ser escrita rapida pero borrada tambien rapida.
+La información almacenada en disco puede ser almacenada durante mucho mas tiempo pero es mucho mas lento escribir y leer en ellos
+
+
+Buffer
+Un buffer es un espacio de memoria (en la memoria ram), en el que se almacenan datos de manera temporal.
+
+Es la forma mas cruda en la que se pueden almacenar los datos. (Se guardan en bytes y no se especifica el tipo de dato)
+
+En la consola, los datos se muestran en formato hexadecimal.
+
+<h3>Creacion de un bufer básico</h3>
+Para crear un buffer, con 4 espacios por ejemplo, podemos hacerlo con la siguiente sintaxis.
+
+let buffer = Buffer.alloc(4);
+console.log(buffer); 
+// Output:
+//<Buffer 00 00 00 00>
+<h3>Otras formas de crear un buffer</h3>
+Datos en un arreglo
+
+let buffer2 = Buffer.from([1,2,3]);
+console.log(buffer2);
+Datos de tipo string
+
+let buffer3 = Buffer.from('Hola');
+console.log(buffer3);
+console.log(buffer3.toString());
+Guardar el abecedario en un buffer
+
+let abc =  Buffer.alloc(26);
+console.log(abc);
+
+for (let i = 0; i< abc.length; i++){
+  abc[i] = i + 97;
+}
+
+console.log(abc);
+console.log(abc.toString())
+
+** Stream**
+Podría decirse que un Stream es el proceso de ir consumiendo datos al tiempo en que se reciben. Por ejemplo, cuando vemos un 
+video en Youtube estamos consumiendo datos por medio de streaming (readable stream, porque solo podemos ver los videos mas no editarlos)
+ ya que lo vemos al mismo tiempo en que este se está descargando. de lo contrario habría que esperar a que se descargue el video por completo para poder verlo.
+
+buffer
+Si en el caso anterior, mientras vemos el video, fallara el internet, así sea por un segundo, la reproducción se pararía 
+instantáneamente. Pero sabemos que en realidad no es así, el video continúa reproduciéndose por un tiempo mas. Esto es gracias
+ a la implementación de un buffer el cuál es un espacio en memoria ram en donde la información proveniente del servidor llega por 
+fragmentos (chunks), para luego ser consumido, y como ese almacenamiento de datos en el buffer se hace a bajo nivel, de forma binaria,
+ el proceso es mucho mas rápido de lo que se consume. Es por eso que cuando reproducimos un video en Youtube vemos que este se carga mas rápido. (dependiendo del ancho de banda claro está)
+
+
+
+
+La función console.time(‘nombre’) inicia un temporizador que se puede usar para rastrear cuánto tiempo dura una operación.
+ El temporizador sera identificado por el nombre dado a la consola. Ese mismo nombre se utilizara cuando se llame a console.timeEnd(‘nombre’) para 
+detener el temporizador y obtener el tiempo demorado durante el proceso.
+
+console.time("Temporizador");
+for (var i = 0; i < 10000; i++) {
+  // Nuestro codigo entre los temporizadores puede ser cualquier cosa.
+}
+console.timeEnd("Temporizador");
+
+
+
+
+Node.js viene integrado con un modo de debug para poder conectarnos 
+desde cualquier herramienta de inspección de código a nuestro código de node.js.
+
+Podemos utilizar en la terminal el flag de --inspect con nodemon
+
+
+Que es gulp.js? 📖🖥💥
+
+Es una herramienta de construcción en JavaScript construida sobre flujos de nodos .
+ Estos flujos facilitan la conexión de operaciones de archivos a través de canalizaciones
+ . Gulp lee el sistema de archivos y canaliza los datos disponibles de un complemento de un solo propósito a otro a través del .pipe()operador,
+ haciendo una tarea a la vez. Los archivos originales no se ven afectados hasta que se procesan todos los complementos. Se puede configurar para 
+modificar los archivos originales o para crear nuevos. Esto otorga la capacidad de realizar tareas complejas mediante la vinculación de sus numerosos
+ complementos. Los usuarios también pueden escribir sus propios complementos para definir sus propias tareas
+
+
+
+💨⚡ Electron 💥💻
+
+(conocido anteriormente como Atom Shell1​) es un framework de código abierto creado por Cheng Zhao, y ahora desarrollado por GitHub. 
+Permite el desarrollo de aplicaciones gráficas de escritorio usando componentes del lado del cliente y del servidor originalmente 
+desarrolladas para aplicaciones web: Node.js del lado del servidor y Chromium como interfaz. Electron es el framework gráfico detrás 
+de muchos proyectos de código abierto importantes, incluyendo a Atom de GitHub​ y Microsoft Visual Studio Code. Wikipedia
+Aplicaciones que usan Electron: 💪 Visual Studio Code, Atom, Slack, WhatsApp, Skype, Twich, Signal, Github desktop.

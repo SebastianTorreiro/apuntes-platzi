@@ -1,0 +1,206 @@
+HTML : estructura una pagina web(esqueleto)
+
+CSS: estilos a tu html 
+
+Motores de renderizado:   intermediador entre el codigo y el navegador.
+
+chrome usa blink
+edge usa edge html
+safari webit
+
+5 pasos:
+
+1ro: pasa los archivos a objetos (DOM(document object model)) osea, el codigo pasado a objetos es el dom
+
+2do: calcula el estilo correspondiente a cada nodo DOM
+
+3ro: calcula las dimensiones de cada nodo y donde va en la pantalla
+
+4rto: pinta las diferentes cajas
+
+5to: tomas las capas y las convierte en una imagen para mostrar en pantalla
+
+
+----------------------HTML----------------------
+
+html semantico:
+		etiquetas con significado, no usar siempre div para todo.
+
+esto ayuda para ser mas accesible tu pagina web, y mejora tu posicionamiento seo
+Ok, Google no es el único, básicamente el significado lo entiende cualquier motor de búsqueda, pero convengamos que Google es el más usado.
+ Cuando tú buscas algo en Google ves que en los resultados te aparecen varias páginas web, y si tú vas a hacer una página web ¡pues también vas a querer que la tuya aparezca! 
+¿No lo crees? Esto hace parte de algo llamado SEO (Search Engine Optimization), es decir, Optimización para Motores de Búsqueda (que aparezcas en Google pues jaja).
+.
+Entonces, para poder aparecer en Google, Google necesita entender cómo está estructurada tu página web, de esa forma Google puede darle una navegación 
+más fácil desde la vista de resultados a cualquier persona que encuentre tu página web mj
+Y la forma en la que Google puede entenderlo es básicamente leyendo tu HTML. Y Google lo leerá por medio de HTML semántico
+.
+¿Eso significa que nunca debería usar <div>? ¡No! Por supuesto que puedes usar <div>, esta etiqueta es muy útil cuando queremos hacer estilos con CSS, por ejemplo. Cuando decimos "no uses <div>"
+ nos referimos a que no deberíamos usarlo para organizar el contenido de tu página, porque simplemente Google ignora cualquier <div> mientras lee tu página. Si tú pones un menú de navegación usando 
+<div> Google lo va a ignorar, pero si tú pones un menú de navegación usando <nav> Google sabrá que tu página web tiene un menú de navegación (y te tomará en cuenta para posicionarte 7u7).
+.
+En cambio, si tú quieres mostrar un contenido dividido en 2 partes (izquierda y derecha) y usas <div> para hacerlo, entonces está súper bien, porque a Google no le importa cómo muestres
+(visualmente) tu contenido, así que en estos casos, <div> nos ayuda mucho cuando queremos hacer cosas visuales con nuestra página
+
+
+etiquetas mas usadas en HTML:
+
+LAYOUT:
+	header
+	nav
+	section
+	article
+	aside
+	footer
+ENLACES:
+	a
+
+TEXTOS: 
+	H1...H6
+	p
+	span
+IMAGENES Y VIDEO:
+	img
+	svg
+	iframe
+	video
+FORMULARIOS:
+	FORM
+	INPUT
+	LABEL
+	BUTTON
+LISTAS:
+	ul
+	li
+	ol
+
+htmlreference.io   ---->   pagina con todas las etiquetas 
+
+https://www.pexels.com/es-es/  ----> pagina para fotos
+
+https://htmlcolorcodes.com/es/  ----> todos los colores
+
+https://css-tricks.com/pseudo-class-selectors/ ----> pseudo class
+
+
+ CSS
+
+anatomia de una declaracion
+
+
+selector {
+propiedad: valor;
+}
+
+EJEMPLO:
+
+h1{
+ color: pink;
+}
+
+Tipos de selectores:
+
+Selectores basicos
+
+de tipo	 | div {...}
+de clase	 |.elemento{....}	( class)
+de id	 |#id-del-elemento
+de atributo|a[href""]{...}
+universal	 |*{...}
+
+
+Selectores combinadores
+
+descendientes	 | div p    ----> Cualquier p que este dentro de un div, sin importan si es hijo del hijo del hijo
+hijo directo	 |div > p  ----> accederia solo un p que este directamente dentro de un div, si es el "nieto" no se veria afectado
+elemento adyacente	 |div + p  ----> se refiere al p que esta inmediatamente debajo del div
+general de hermanos|div ~ p  ----> todos los p que esten en la misma "jerarquia" que el div
+
+
+También podemos ver a las pseudoclases como estados de algún elemento 
+(con el mouse encima, visitado, activo, etc.) y a los pseudoelementos como elementos que escribimos desde CSS,
+ por ejemplo, el ::after y el ::before nos puedes funcionar como divs, como su nombre lo dice, son elementos, pero no necesariamente están escritos desde el HTML 👀.
+
+pseudoclases y pseudoelementos
+:active		::after
+:focus		::before
+:hover		::first-letter
+:nth-child(n)	::placeholder
+
+Especificidad
+
+x 0 0 0 0 !important
+   x 0 0 0 estilos en linea
+      x 0 0 #id
+         x 0 clases, atributos, y pseudoclase
+            x  elementos y pseudoelementos
+            0 selector universal
+
+
+En Vscode podemos ver la especificidad de nuestros elementos colocando el cursor sobre el nombre del selector.
+	
+Display : es el tipo de visualizacion que tiene los elementos.
+
+inline: Estos elementos son los que su caja mide exactamente lo mismo que su contenido. Estos elementos los podemos usar en textos 
+y en lugar de que se agreguen en una nueva línea se agregaran justo al ladito del texto. ❗ Tienen como desventaja que no podemos ponerles
+ márgenes ni tampoco podemos cambiar su tamaño.
+
+block: Estos elementos ocupan toda la pantalla, por lo que si quieres agregar otro elemento, este se agregará automáticamente abajo. 
+No importa que tengas poco contenido, el elemento sí o sí va a ocupar toda la pantalla.
+
+inline-block: Esto mezcla lo mejor de ambos mundos. Con este display podemos tener tanto los
+ beneficios de inline como de block, es decir, podemos tener elementos que no ocupen todo el ancho de la pantalla, 
+sino que ocupen solamente lo que su contenido ocupa, pero también vamos a poder darle márgenes y podremos cambiar su tamaño 
+
+
+
+Flexbox
+Flexbox es magia, con Flexbox podemos literal manipular los elementos a como queramos. ¿Alguna vez has visto el meme de “programadores sufriendo por centrar un div”?
+ Pues Flexbox rompe ese meme de manera épica 😎.
+.
+Con Flexbox podemos alinear los elementos a como queramos, así lo queramos a la izquierda, en el centro o a la derecha,
+ tanto vertical como horizontalmente, por ejemplo, lo más común, centrar un elemento:
+.
+
+https://css-tricks.com/snippets/css/a-guide-to-flexbox/  ---> guia de flexbox
+
+
+
+MODELO DE CAJA 
+
+
+Esto es un tema muy mindblow 🤯. Básicamente porque todo en HTML son cajitas, sí, incluso un texto es una caja. 
+Cuando tú insertas un texto, lo que estás haciendo es que estás insertando una cajita que adentro tiene texto (y lo mismo aplica para cualquier etiqueta). 
+Esta cajita tiene un fondo transparente, pero si tú le pones cualquier fondo usando la propiedad background podrás ver esa cajita. Esta cajita, además de su contenido, 
+tiene estas 3 capas externas que serían el padding, el border y el margin 👇:
+.
+
+padding: Es básicamente el espaciado que hay entre la caja y el contenido de la caja, es un espaciado interno. Lo solemos usar mucho para permitir que los elementos “respiren”,
+
+border: Es el delineado que le podemos dar a una caja, y un borde puede ser tan grueso como quieras. Simplemente debemos ponerle el grosor, el tipo de borde y el color del borde,
+
+margin: Este es básicamente el espaciado entre elementos. Es la distancia que podemos dejar de un elemento hacia otro.
+
+Y para resumir la propiedad box-sizing: border-box; es sencilla: si pones esta propiedad, ekl tamaño final de tu caja va a ser del width que tú le pongas, si no la pones, 
+el tamaño final de tui caja va a ser del width que tú le pongas más el tamaño de tu padding, más el de tu borde má el de tu margin 
+
+Y de ahora en adelante cuando empieces a desarrollar, notarás que muchos usan esto en CSS 👇	
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+Básicamente usan el selector universal para aplicarle a toooooodas las etiquetas estas propiedades (es decir, resetean estas propiedades, porque por defecto, el navegador le pone ciertos estilos 😄)
+
+COLAPSO DE MARGENES:
+
+sucede cuando:
+
+hay dos elementos bloque adyacentes
+
+no sucede cuando:
+
+flexbox, grid y elementos que no sean bloque 
+
+https://www.exasoluciones.com/inicio/tutoriales/css/columnas-multiples-css

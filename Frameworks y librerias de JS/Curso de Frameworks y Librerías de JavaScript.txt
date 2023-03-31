@@ -1,0 +1,26 @@
+1) Cuando necesitas un framework de JavaScript?
+
+Websites (Sitios Web): Son estáticos (iguales para todos los usuarios), y se pueden hacer únicamente con HTML y CSS
+.
+Webapps (Aplicaciones Web); Son dinámicas (interactivas con los usuarios) y para estas se necesita JS aparte de HTML y CSS, y algún framework para facilitar el desarrollo.
+
+Framework (Entorno/Marco de trabajo​): Contiene librerías y herramientas que nos ayudarán a construir algo más rápido, garantizando la calidad gracias a una metodología y estructura de trabajo bien definida.
+Librería: Es un fragmento de código que nos ayuda a resolver un problema específico y que tiene un propósito concreto.
+
+2) Qué son los componentes?
+
+En JS muchas cosas se tenían que escribir de manera diferente para cada navegador hasta que llegó JQuery a solucionar estos problemas ya que permite escribir un mismo código de JS 
+y JQuery hace la traducción para los demás navegadores. Hoy ya no necesitamos de JQuery, solo JS.
+
+Hoy día JS es tan bueno que empieza a reemplazar a HTML, cada vez se escribe menos html y más JS, pero aún así no lo va a reemplazar ya que todo lo que maquetemos 
+en JS se convierte en HTML, la diferencia es que cada vez lo hacemos menos en HTML y más en JS.
+
+Al escribir más en JS, nos damos cuenta que podemos reusar partes completas de una página en otras. Es un concepto parecido a las funciones. Nos da la ventaja
+ de usar condicionales, ciclos y todas las ventajas que nos puede brindar un lenguaje de programación.
+
+Pensemos en los componentes como bloques de Lego, cada uno es un elemento, y al tener muchos podemos apilarlos hasta armar una app por completo, además de que 
+nos brinda la oportunidad de cambiarlos dependiendo de lo que necesitemos. Un componente solo no nos sirve de mucho, tenemos que unirlos de alguna manera,
+ aquí entra un concepto llamado “composición de componentes” porque podemos crear componentes usando otros componentes, como los formularios que son componentes que dentro tienen más componentes.
+
+3)
+

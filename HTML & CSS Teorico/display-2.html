@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 
+        justify-content: space-between; para que haya espacion entre ellos
+        justify-content: center; para que esten todos en el medio (eje x)
+        align-items: center; para que esten todos en el medio (eje y)
+        flex-direction: column; para colocarlos en forma de columna
+         */
+        .container{
+            display: flex;
+            background: blue;
+            justify-content: center; 
+            height: 300px;
+            align-items: center;
+            flex-direction: column;
+            
+        }
+        .item{
+            width: 30px;
+            height: 30px;
+            background:red;
+        }
+        .container div:nth-child(2n + 1) {
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+</body>
+</html>
